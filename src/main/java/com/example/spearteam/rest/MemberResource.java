@@ -32,31 +32,14 @@ public class MemberResource {
 
     @GET
     @Produces({MediaType.APPLICATION_JSON})
-    @Path("get_all")
     public Response getAllMembers() {
-//        if(memberService.getAll().isEmpty()){
-//            ResponseDTO<Member> response = new ResponseDTO<>();
-//            response.setMessage("The list is empty !");
-//            response.setObject(null);
-//            response.setStatusCode(404);
-//            response.setCreatedTime("2022-12-08");
-//
-//            return Response.ok(response).status(Response.Status.NOT_FOUND).build();
-//        }else{
-//            ResponseDTO<Member> response = new ResponseDTO<>();
-//            response.setMessage("Get member success !");
-//            response.setObjectList(memberService.getAll());
-//            response.setStatusCode(200);
-//            response.setCreatedTime("2022-12-08");
-//            return Response.ok(response).build();
-//        }
         return Response.ok(memberService.getAll()).status(Response.Status.OK).build();
     }
 
 
     @GET
     @Produces({MediaType.APPLICATION_JSON})
-    @Path("get_member_by_id/{MemberId}")
+    @Path("{MemberId}")
     public Response getMemberById(@PathParam("MemberId") Integer MemberId) {
         return Response.ok(memberService.getById(MemberId)).build();
     }
@@ -65,17 +48,15 @@ public class MemberResource {
     @POST
     @Consumes({MediaType.APPLICATION_JSON})
     @Produces({MediaType.APPLICATION_JSON})
-    @Path("add_member")
     public Response addMember(MemberRequest memberRequest) {
         MemberDTO createMember = memberService.createMember(memberRequest);
-//        System.out.println(Response.created(appendCurrentUriWith(createMember.getFullName())));
         return Response.ok().entity(createMember).status(Response.Status.CREATED).build();
     }
 
 
     @DELETE
     @Produces({MediaType.APPLICATION_JSON})
-    @Path("delete_member_by_id/{MemberId}")
+    @Path("{MemberId}")
     public Response deleteMember(@PathParam("MemberId") Integer MemberId) {
         memberService.deleteMemberById(MemberId);
         return Response.ok().status(Response.Status.OK).build();
@@ -85,7 +66,7 @@ public class MemberResource {
     @PUT
     @Consumes({MediaType.APPLICATION_JSON})
     @Produces({MediaType.APPLICATION_JSON})
-    @Path("update_member/{MemberId}")
+    @Path("{MemberId}")
     public Response updateMember(MemberRequest memberRequest, @PathParam("MemberId") Integer MemberId) {
         MemberDTO updateMember = memberService.updateMember(memberRequest, MemberId);
         return Response.ok().entity(updateMember).status(Response.Status.OK).build();
