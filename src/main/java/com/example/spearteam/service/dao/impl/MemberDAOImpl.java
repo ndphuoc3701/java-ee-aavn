@@ -91,6 +91,5 @@ public class MemberDAOImpl implements MemberDAO {
         }else{
             return null;
         }
-
     }
 }
