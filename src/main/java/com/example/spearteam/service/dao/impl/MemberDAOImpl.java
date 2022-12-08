@@ -64,10 +64,7 @@ public class MemberDAOImpl implements MemberDAO {
 
     @Override
     public Member saveMember(MemberRequest member) {
-        Member checkMem = findByEmail(member.getEmail());
-        if(checkMem!=null){
-            return null;
-        }
+//        Member checkMem = findByEmail(member.getEmail());
             Member member1 = new Member();
             member1.setEmail(member.getEmail());
             member1.setFullName(member.getFullName());
