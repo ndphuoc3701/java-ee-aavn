@@ -9,7 +9,7 @@ import javax.enterprise.context.ApplicationScoped;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2022-12-08T09:12:53+0700",
+    date = "2022-12-09T08:38:43+0700",
     comments = "version: 1.5.2.Final, compiler: javac, environment: Java 11.0.17 (Eclipse Adoptium)"
 )
 @ApplicationScoped
@@ -23,8 +23,12 @@ public class MemberMapperImpl implements MemberMapper {
 
         MemberDTO memberDTO = new MemberDTO();
 
+        if ( member.getId() != null ) {
+            memberDTO.setId( String.valueOf( member.getId() ) );
+        }
         memberDTO.setFullName( member.getFullName() );
         memberDTO.setEmail( member.getEmail() );
+        memberDTO.setDob( member.getDob() );
         memberDTO.setPhone( member.getPhone() );
         memberDTO.setHomeTown( member.getHomeTown() );
         memberDTO.setUniversity( member.getUniversity() );
@@ -54,8 +58,12 @@ public class MemberMapperImpl implements MemberMapper {
 
         Member member = new Member();
 
+        if ( memberDTO.getId() != null ) {
+            member.setId( Integer.parseInt( memberDTO.getId() ) );
+        }
         member.setFullName( memberDTO.getFullName() );
         member.setEmail( memberDTO.getEmail() );
+        member.setDob( memberDTO.getDob() );
         member.setPhone( memberDTO.getPhone() );
         member.setHomeTown( memberDTO.getHomeTown() );
         member.setUniversity( memberDTO.getUniversity() );

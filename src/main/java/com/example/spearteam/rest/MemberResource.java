@@ -28,28 +28,27 @@ public class MemberResource {
 
     @GET
     @Produces({MediaType.APPLICATION_JSON})
-    @Path("getAll")
     public Response getAllMembers() {
         if(memberService.getAll().isEmpty()){
-            return Response.ok().status(Response.Status.NOT_FOUND).build();
+            return Response.ok().status(Response.Status.BAD_REQUEST).build();
         }else{
-            return Response.ok(memberService.getAll()).build();
+            return Response.status(200)
+                    .entity(memberService.getAll()).build();
         }
     }
 
 
     @GET
     @Produces({MediaType.APPLICATION_JSON})
-    @Path("getMember/{MemberId}")
-    public Response getMemberById(@PathParam("MemberId") Integer MemberId) {
-        return Response.ok(memberService.getById(MemberId)).build();
+    @Path("/{MemberId}")
+    public Response getMemberById(@PathParam("MemberId") Integer memberId) {
+        return Response.status(200)
+               .entity(memberService.getById(memberId)).build();
     }
-
 
     @POST
     @Consumes({MediaType.APPLICATION_JSON})
     @Produces({MediaType.APPLICATION_JSON})
-    @Path("addMember")
     public Response addMember(MemberRequest memberRequest) {
         MemberDTO createMember = memberService.createMember(memberRequest);
 //        System.out.println(Response.created(appendCurrentUriWith(createMember.getFullName())));
@@ -58,18 +57,19 @@ public class MemberResource {
 
 
     @DELETE
-    @Produces({MediaType.APPLICATION_JSON})
-    @Path("delete/{MemberId}")
+    @Path("/{MemberId}")
     public Response deleteMember(@PathParam("MemberId") Integer MemberId) {
         memberService.deleteMemberById(MemberId);
-        return Response.ok().build();
+
+        return Response.ok()
+                .build();
     }
 
 
     @PUT
     @Consumes({MediaType.APPLICATION_JSON})
     @Produces({MediaType.APPLICATION_JSON})
-    @Path("{MemberId}")
+    @Path("/{MemberId}")
     public Response updateMember(MemberRequest memberRequest, @PathParam("MemberId") Integer MemberId) {
         MemberDTO updateMember = memberService.updateMember(memberRequest, MemberId);
         return Response.ok().entity(updateMember).status(Response.Status.OK).build();

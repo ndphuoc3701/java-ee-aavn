@@ -1,4 +1,5 @@
 com\example\spearteam\service\mapper\MemberMapper.class
+com\example\spearteam\CORSFilter.class
 com\example\spearteam\rest\RestConfiguration.class
 com\example\spearteam\service\MemberService.class
 com\example\spearteam\service\dto\MemberDTO.class

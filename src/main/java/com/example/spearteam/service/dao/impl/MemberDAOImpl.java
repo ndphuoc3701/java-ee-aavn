@@ -23,7 +23,7 @@ public class MemberDAOImpl implements MemberDAO {
 
     @Override
     public Member findById(Integer id) {
-        Query getById = em.createQuery("SELECT m FROM Member m WHERE m.memberId = :id", Member.class).setParameter("id", id);
+        Query getById = em.createQuery("SELECT m FROM Member m WHERE m.id = :id", Member.class).setParameter("id", id);
         return (Member) getById.getSingleResult();
     }
 
