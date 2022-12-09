@@ -1,9 +1,11 @@
 package com.example.spearteam.rest;
 
 
+import com.example.spearteam.entity.Member;
 import com.example.spearteam.rest.request.MemberRequest;
 import com.example.spearteam.service.MemberService;
 import com.example.spearteam.service.dto.MemberDTO;
+import com.example.spearteam.service.dto.base.ResponseDTO;
 
 
 import javax.ejb.Stateless;
@@ -14,6 +16,8 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 import java.net.URI;
+import java.time.LocalDate;
+import java.util.Date;
 
 @Stateless
 @Path(MemberResource.PATH)
@@ -35,15 +39,18 @@ public class MemberResource {
             return Response.status(200)
                     .entity(memberService.getAll()).build();
         }
+
     }
 
 
     @GET
     @Produces({MediaType.APPLICATION_JSON})
+
     @Path("/{MemberId}")
     public Response getMemberById(@PathParam("MemberId") Integer memberId) {
         return Response.status(200)
                .entity(memberService.getById(memberId)).build();
+
     }
 
     @POST
@@ -51,7 +58,6 @@ public class MemberResource {
     @Produces({MediaType.APPLICATION_JSON})
     public Response addMember(MemberRequest memberRequest) {
         MemberDTO createMember = memberService.createMember(memberRequest);
-//        System.out.println(Response.created(appendCurrentUriWith(createMember.getFullName())));
         return Response.ok().entity(createMember).status(Response.Status.CREATED).build();
     }
 
@@ -63,6 +69,7 @@ public class MemberResource {
 
         return Response.ok()
                 .build();
+
     }
 
 
@@ -73,11 +80,6 @@ public class MemberResource {
     public Response updateMember(MemberRequest memberRequest, @PathParam("MemberId") Integer MemberId) {
         MemberDTO updateMember = memberService.updateMember(memberRequest, MemberId);
         return Response.ok().entity(updateMember).status(Response.Status.OK).build();
-    }
-
-
-    private URI appendCurrentUriWith(String fragment) {
-        return uriInfo.getAbsolutePathBuilder().path(fragment).build();
     }
 
 

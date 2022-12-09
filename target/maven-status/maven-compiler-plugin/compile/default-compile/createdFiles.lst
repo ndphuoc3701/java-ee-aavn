@@ -9,5 +9,4 @@ com\example\spearteam\rest\request\MemberRequest.class
 com\example\spearteam\service\dto\base\ResponseDTO.class
 com\example\spearteam\service\dao\impl\MemberDAOImpl.class
 com\example\spearteam\rest\MemberResource.class
-com\example\spearteam\service\dto\base\ResponseDTO$ResponseDTOBuilder.class
 com\example\spearteam\service\dao\MemberDAO.class
